@@ -117,49 +117,50 @@ function cleanGauge(index = 0){
     d3.json(bbData).then(function(data){
         let dataSamp = data.metadata[index];
         let washFreq = dataSamp.wfreq;
+        if (washFreq === 'null'){
+            washFreq = 0;
+        };
         // plot devised between https://plotly.com/javascript/gauge-charts/ and https://stackoverflow.com/questions/67529286/how-to-add-a-needle-or-dial-to-gauge-indicator-in-plotly-js
-        // plus tinkering
+        // https://observablehq.com/@arronhunt/building-a-gauge-meter-with-plotly and https://coolors.co/gradient-palette/fff7d9-0d8c02?number=9
+        // and some tinkering
         gaugeData = [{
-            title: { text: "Washes per Week" },
-            type: "indicator",
-            mode: "gauge",
-            value: washFreq,
-
-            gauge: {
-                shape: "angular",
-                axis: { range: [0, 9] },
-                steps: [
-                    { range: [0, 1], color: "rgb(204, 255, 206)" },
-                    { range: [1, 2], color: "rgb(178, 255, 182)" },
-                    { range: [2, 3], color: "rgb(153, 229, 157)" },
-                    { range: [3, 4], color: "rgb(127, 204, 131)" },
-                    { range: [4, 5], color: "rgb(102, 178, 106)" },
-                    { range: [5, 6], color: "rgb(76, 153, 80)" },
-                    { range: [6, 7], color: "rgb(51, 127, 55)" },
-                    { range: [7, 8], color: "rgb(25, 102, 29)" },
-                    { range: [8, 9], color: "rgb(0, 76, 4)" }
-                ]   
-            }
+            
+            type: 'pie',
+            showlegend: false,
+            hole: 0.4,
+            rotation: 90,
+            values: [20, 20, 20, 20, 20, 20, 20, 20, 20, 180],
+            text: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'],
+            direction: 'clockwise',
+            textinfo: 'text',
+            textposition: 'inside',
+            marker: {
+                colors: ['#fff7d9','#e1eabe','#c3dca3','#a4cf88','#86c26e','#68b453','#4aa738','#2b991d','#0d8c02','white'],
+                labels: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9',''],
+                hoverinfo: "label"
+                    },
+            hoverinfo: "skip"
         }];
 
         let theta = (180 - 20*washFreq); 
         
-        let r = .3
+        let r = .5
         let x_head =  r*Math.cos(Math.PI/180*theta)
         let y_head =  r*Math.sin(Math.PI/180*theta)
 
         let layout = {
-            xaxis: {range: [0, 1], showgrid: false, 'zeroline': false, 'visible': false},
-            yaxis: {range: [0, 1], showgrid: false, 'zeroline': false, 'visible': false},
+            title: "<b>Belly Button Wash Freqency</b><br>Scrubs per Week",
+            xaxis: {range: [-1, 1], showgrid: false, 'zeroline': false, 'visible': false},
+            yaxis: {range: [-1, 1], showgrid: false, 'zeroline': false, 'visible': false},
             showlegend: false,
             annotations: [
                 {
-                    ax: 0.5,
-                    ay: 0.3,
+                    ax: 0,
+                    ay: 0,
                     axref: 'x',
                     ayref: 'y',
-                    x: 0.5+x_head,
-                    y: .3 +y_head,
+                    x:  x_head,
+                    y:  y_head,
                     xref: 'x',
                     yref: 'y',
                     showarrow: true,
