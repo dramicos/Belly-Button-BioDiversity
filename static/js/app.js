@@ -120,9 +120,7 @@ function cleanGauge(index = 0){
         if (washFreq === 'null'){
             washFreq = 0;
         };
-        // plot devised between https://plotly.com/javascript/gauge-charts/ and https://stackoverflow.com/questions/67529286/how-to-add-a-needle-or-dial-to-gauge-indicator-in-plotly-js
-        // https://observablehq.com/@arronhunt/building-a-gauge-meter-with-plotly and https://coolors.co/gradient-palette/fff7d9-0d8c02?number=9
-        // and some tinkering
+        // see readme.md for sources used to help develop the gauge plot
         gaugeData = [{
             
             type: 'pie',
