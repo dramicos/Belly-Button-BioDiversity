@@ -3,6 +3,7 @@ An interactive dashboard for looking at the organisms living in human belly butt
 
 ### by:
 * Arnold Schultz
+link to site: https://github.com/dramicos/Belly-Button-BioDiversity
 
 # Overview:
 This is a data dashboard visualization of the bacterial growth inside of a person's belly button.  In it you will be able to select different test subjects and see what is growing on inside.  There is an info card to show the subject's demographics as well if they have an 'innie' or 'outie' belly button and how often they clean it. The dataset will show that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
